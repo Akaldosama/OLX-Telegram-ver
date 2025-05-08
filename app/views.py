@@ -141,9 +141,6 @@ def get_cart(request, telegram_id):
 
 
 
-
-
-
 @api_view(['GET'])
 def get_user_by_telegram_id(request, telegram_id):
     try:

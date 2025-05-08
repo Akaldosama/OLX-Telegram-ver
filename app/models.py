@@ -48,4 +48,4 @@ class Cart(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Order by {self.user.fullname} for {self.product.title}"
+        return f"{self.product.title}"
