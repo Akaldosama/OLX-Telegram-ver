@@ -5,56 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f88b6bc-2569-48fa-8456-1c10066e8f77" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/11-project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/0a4e3b0f282601f1f69face5f2352598.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/0a4e3b0f282601f1f69face5f2352598_vAXTsiR.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/bmwCar.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/carAudi.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/carAudi_7FVUB3Z.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/carLambo.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/hpLaptop.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/hpLaptop_1lK2s9C.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/iphone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_1V0fMAf.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_JI888sS.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_RhkegsT.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_VhcDiMU.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_W434pEk.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_Z84dGdE.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_alBalhO.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_jHsrgXc.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_m0W8ujv.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_rd0qF5Y.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_rgfGrpV.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_suwpMIn.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/product_pic/product_uiohbMh.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product_pic/0a4e3b0f282601f1f69face5f2352598.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product_pic/resize_1500_833_true_q90_993792_352abb864bfea349f4f7ff30b.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/project/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/product_pic/product_ytvPYPN.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/migrations/0002_rename_buyer_cart_user_remove_cart_seller_purchase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

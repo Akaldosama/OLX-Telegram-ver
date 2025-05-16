@@ -1,4 +1,6 @@
 # online market bot registration, photo, product, get, put, delete, sold. 9.24
+from urllib.parse import urljoin
+
 import aiohttp
 from aiogram import Bot, Dispatcher, executor, types
 import logging
@@ -10,8 +12,9 @@ from aiogram.types import ContentType
 from aiogram import types
 import re
 
+
 url = 'https://7f51-213-230-80-71.ngrok-free.app'
-TOKEN = '7758239108:AAHnLTmadRdpfe4C60V6-5P_0b2RvqpGrAU'
+TOKEN = '7582569621:AAHHogMEU3guxPRQMVsBT2rLPJDFNRAeoz0'
 URL_REGISTRATION = f'{url}/registration/'
 URL_PRODUCT_TYPES = f'{url}/product-types/'
 URL_PRODUCTS = f'{url}/products/'
@@ -130,8 +133,7 @@ async def require_registration(message: types.Message):
 
 
 @dp.message_handler(
-    lambda message: message.text and message.text not in ['/start', '/products', '/post_product', '/myproducts',
-                                                          '/cart'],
+    lambda message: message.text and message.text not in ['/start', '/products', '/post_product', '/myproducts', '/cart'],
     state=ProductStates.product
 )
 async def get_products(message: types.Message):
@@ -155,7 +157,7 @@ async def get_products(message: types.Message):
             for product in products:
                 text = (
                     f"📦 {product['title']}\n"
-                    f"💰 Price: {product['price']}\n"
+                    f"💰 Price: {product['price']} $\n"
                     f"📄 {product['description']}"
                 )
 
@@ -267,7 +269,7 @@ async def handle_price(message: types.Message, state: FSMContext):
         await message.answer("❗ Invalid price format. Please enter a number.")
         return
 
-    response = requests.get("http://127.0.0.1:8000/product-types/")
+    response = requests.get(URL_PRODUCT_TYPES)
     if response.status_code == 200:
         types_data = response.json()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -283,7 +285,7 @@ async def handle_price(message: types.Message, state: FSMContext):
 async def handle_type(message: types.Message, state: FSMContext):
     type_name = message.text
 
-    type_response = requests.get(f"{url}/product-types/")
+    type_response = requests.get(URL_PRODUCT_TYPES)
     if type_response.status_code != 200:
         await message.answer("❌ Failed to get product types.")
         await state.finish()
@@ -347,6 +349,49 @@ async def handle_type(message: types.Message, state: FSMContext):
 
 # =================================================================================================================================================
 
+# @dp.message_handler(commands=['myproducts'], state='*')
+# async def my_products(message: types.Message):
+#     telegram_id = str(message.from_user.id)
+#
+#     response = requests.get(f'{url}/user/{telegram_id}')
+#     if response.status_code == 200:
+#         user_data = response.json()
+#         if not user_data['is_registered']:
+#             await message.answer("You must register first using the '/start"
+#                                  "' command.")
+#             return
+#
+#         response = requests.get(f'{url}/products?user={telegram_id}')
+#         if response.status_code == 200:
+#             products = response.json()
+#             if products:
+#                 for product in products:
+#                     text = (
+#                         f"📦 {product['title']}\n"
+#                         f"💰 Price: {product['price']} $\n"
+#                         f"📄 {product['description']}"
+#                     )
+#                     photo_path = product.get('photo')
+#                     print(photo_path)  # /media/product.jpg
+#                     photo_url = f'{url}/{photo_path}' if photo_path else None
+#                     remove_btn = types.InlineKeyboardMarkup()
+#                     remove_btn.add(
+#                         types.InlineKeyboardButton("Remove", callback_data=f"remove_product:{product['id']}"))
+#                     if photo_url:
+#                         try:
+#                             await message.answer_photo(photo=photo_url, caption=text, reply_markup=remove_btn)
+#                         except Exception:
+#                             await message.answer(text, reply_markup=remove_btn)
+#                     else:
+#                         await message.answer(text, reply_markup=remove_btn)
+#             else:
+#                 await message.answer("You haven't posted any products yet.")
+#         else:
+#             await message.answer("Something went wrong while fetching your products.")
+#     else:
+#
+#         await message.answer("Something went wrong while checking your registration. Please try again later.")
+
 @dp.message_handler(commands=['myproducts'], state='*')
 async def my_products(message: types.Message):
     telegram_id = str(message.from_user.id)
@@ -355,50 +400,52 @@ async def my_products(message: types.Message):
     if response.status_code == 200:
         user_data = response.json()
         if not user_data['is_registered']:
-            await message.answer("You must register first using the '/start"
-                                 "' command.")
+            await message.answer("You must register first using the '/start' command.")
             return
 
-        response = requests.get(
-            f'{url}/products?user={telegram_id}')
+        user_id = user_data['id']  # Get internal user ID for filter
+        response = requests.get(f'{url}/products/?user={telegram_id}')
         if response.status_code == 200:
             products = response.json()
             if products:
                 for product in products:
                     text = (
                         f"📦 {product['title']}\n"
-                        f"💰 Price: {product['price']}\n"
+                        f"💰 Price: {product['price']} $\n"
                         f"📄 {product['description']}"
                     )
                     photo_path = product.get('photo')
-                    print(photo_path)  # /media/product.jpg
-                    photo_url = f'{url}/{photo_path}' if photo_path else None
-                    buy_btn = types.InlineKeyboardMarkup()
-                    buy_btn.add(types.InlineKeyboardButton("Buy", callback_data=f"buy:{product['id']}"))
+                    print(photo_path)
+                    photo_url = f'{photo_path}' if photo_path else None
+                    print(photo_url)
+                    remove_btn = types.InlineKeyboardMarkup()
+                    remove_btn.add(
+                        types.InlineKeyboardButton("Remove", callback_data=f"remove_product:{product['id']}"))
                     if photo_url:
                         try:
-                            await message.answer_photo(photo=photo_url, caption=text, reply_markup=buy_btn)
+                            await message.answer_photo(photo=photo_url, caption=text, reply_markup=remove_btn)
                         except Exception:
-                            await message.answer(text, reply_markup=buy_btn)
+                            await message.answer(text, reply_markup=remove_btn)
                     else:
-                        await message.answer(text, reply_markup=buy_btn)
+                        await message.answer(text, reply_markup=remove_btn)
             else:
                 await message.answer("You haven't posted any products yet.")
         else:
             await message.answer("Something went wrong while fetching your products.")
     else:
-
         await message.answer("Something went wrong while checking your registration. Please try again later.")
+
 
 
 @dp.message_handler(commands=['cart'], state='*')
 async def view_cart(message: types.Message):
     telegram_id = str(message.from_user.id)
 
-    response = requests.get(f'{url}/cart/{telegram_id}/')
+    response = requests.get(f'{url}/cart/by-user/{telegram_id}/')
 
     if response.status_code == 200:
         cart_items = response.json()
+        print(cart_items)
         if not cart_items:
             await message.answer("🛒 Your cart is empty.")
         else:
@@ -406,21 +453,79 @@ async def view_cart(message: types.Message):
                 product = item['product']
                 text = (
                     f"📦 {product['title']}\n"
-                    f"💰 Price: {product['price']}\n"
+                    f"💰 Price: {product['price']} $\n"
                     f"📄 {product['description']}"
                 )
 
-                photo_url = product.get('photo')
+                photo_path = product.get('photo')
+                photo_url = urljoin(url, photo_path) if photo_path else None
+                print(f"Final photo URL: {photo_url}")
+
+                btn = types.InlineKeyboardMarkup()
+                remove_btn = types.InlineKeyboardButton("Remove", callback_data=f"remove_cart:{product['id']}")
+                buy_btn = types.InlineKeyboardButton("Buy", callback_data=f"buy:{product['id']}")
+                btn.add(remove_btn, buy_btn)
+
                 if photo_url:
-                    photo_url = f"{url}{photo_url}"
                     try:
-                        await message.answer_photo(photo=photo_url, caption=text)
-                    except Exception:
-                        await message.answer(text)
+                        await message.answer_photo(photo=photo_url, caption=text, reply_markup=btn)
+                    except Exception as e:
+                        print(f"❌ Error sending photo: {e}")
+                        await message.answer(text, reply_markup=btn)
                 else:
-                    await message.answer(text)
+                    await message.answer(text, reply_markup=btn)
+
     else:
         await message.answer("❌ Failed to fetch your cart.")
+
+# =================================================================================================================================================
+
+# @dp.callback_query_handler(lambda c: c.data.startswith('remove_product:'), state='*')
+# async def remove_product(callback_query: types.CallbackQuery):
+#     product_id = callback_query.data.split(":")[1]
+#     telegram_id = str(callback_query.from_user.id)
+#
+#     # Remove product from API (delete from user products)
+#     response = requests.delete(f'{url}/products/{product_id}?user={telegram_id}/')
+#
+#     if response.status_code == 200:
+#         await callback_query.answer("Product removed successfully.")
+#         await bot.delete_message(callback_query.message.chat.id, callback_query.message.message_id)
+#     else:
+#         await callback_query.answer("❌ Failed to remove product. Please try again later.")
+
+@dp.callback_query_handler(lambda c: c.data.startswith('remove_product:'), state='*')
+async def remove_product(callback_query: types.CallbackQuery):
+    product_id = callback_query.data.split(":")[1]
+    telegram_id = str(callback_query.from_user.id)
+
+    # ✅ Corrected URL (no trailing slash after query string)
+    # response = requests.delete(f'{url}/products/{product_id}/?user={telegram_id}/')
+    response = requests.delete(f'{url}/products/{product_id}/?user={telegram_id}')
+
+    if response.status_code == 200:
+        await callback_query.answer("✅ Product removed successfully.")
+        await bot.delete_message(callback_query.message.chat.id, callback_query.message.message_id)
+    else:
+        print(response.text)
+        await callback_query.answer("❌ Failed to remove product. Please try again later.")
+
+
+@dp.callback_query_handler(lambda c: c.data.startswith('remove_cart:'), state='*')
+async def remove_from_cart(callback_query: types.CallbackQuery):
+    product_id = callback_query.data.split(":")[1]
+    telegram_id = str(callback_query.from_user.id)
+
+    # Remove product from cart (delete from user's cart)
+    response = requests.delete(f'{url}/cart/{telegram_id}/{product_id}/')
+
+    if response.status_code == 200:
+        await callback_query.answer("Product removed from cart.")
+        await bot.delete_message(callback_query.message.chat.id, callback_query.message.message_id)
+    else:
+        await callback_query.answer("❌ Failed to remove product from cart. Please try again later.")
+
+
 
 
 if __name__ == "__main__":

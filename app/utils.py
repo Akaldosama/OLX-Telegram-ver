@@ -3,7 +3,7 @@ import requests
 
 def send_message_to_seller(seller_telegram_id, buyer_name, buyer_phone, product_title):
     # Replace with your bot token
-    bot_token = '7758239108:AAHnLTmadRdpfe4C60V6-5P_0b2RvqpGrAU'
+    bot_token = '7582569621:AAHHogMEU3guxPRQMVsBT2rLPJDFNRAeoz0'
 
     # Construct the message
     message = (
@@ -30,3 +30,6 @@ def send_message_to_seller(seller_telegram_id, buyer_name, buyer_phone, product_
         print(f"Error: {response.status_code} - {response.text}")
     else:
         print("Message sent successfully.")
+
+
+

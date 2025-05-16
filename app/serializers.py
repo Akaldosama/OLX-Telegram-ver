@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, Product, ProductType, Purchase
+from .models import User, Product, ProductType, Purchase, Cart
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,3 +46,9 @@ class BuyProductSerializer(serializers.ModelSerializer):
         return Purchase.objects.create(buyer=buyer, seller=seller, product=product)
 
 
+class CartSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()  # 👈 This nests the full product info
+
+    class Meta:
+        model = Cart
+        fields = '__all__'
